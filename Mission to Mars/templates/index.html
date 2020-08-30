@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Mission to Mars</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="jumbotron text-center">
+            <h1>Mission to Mars</h1>
+            <p>Click the button to scrape latest news</p>
+            <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data!</a></p>
+        </div>
+
+        <!--   First row - News Title and description-->        
+        <div class="row">
+            <div class='col-md-12'>
+                <h2>Latest Mars News</h2>
+                <h4> {{ (mars_html and mars_html.news_title) or "No data found yet" }} </h4>
+                <p> {{ (mars_html and mars_html.news_para) or "No data found yet" }} </p>
+            </div>
+        </div>
+        
+        <!--   Second row - JPL Image and Mars Facts  -->        
+        <div class="row">
+            <!--  JPL Image Display -->
+            <div class='col-md-7'>
+                <h2>Featured Mars Image</h2>
+                <img src="{{ mars_html.jpl_image }}" alt="Featured Mars Image" class = "img-responsive" width = "100%">
+            </div>
+            
+            <div class='col-md-5' style="padding:15px;">
+                <!--  Display Mars Facts Table    -->
+                <h3> Mars Facts </h3>
+                <table border="1">
+                    <tr>
+                        <td>Description</td>
+                        <td>Values</td>
+                    </tr>
+                    {% for row in mars_html.mars_data %}
+                    <tr>
+                        <td>{{ row.Description }}</td>
+                        <td>{{ row.Units }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>                
+        </div>
+
+        <!-- Third row -  Hemisphere   -->
+        <div class="row">
+            <h3 style="text-align: center;"> Mars Hemispheres </h3>
+            <div class='col-md-6'>
+                <!-- <img src="{{ (mars_html and mars_html.hemisphere[0]['img_url']) or "No data found yet" }}" class = "img-responsive" width = "100%"> -->
+                <div class="card" class = "img-responsive" width = "100%">
+                    <img class="card-img-top" src="{{ (mars_html and mars_html.hemisphere[0]['img_url']) or "No data found yet" }}" alt="Card image cap" class = "img-responsive" width = "100%">
+                    <div class="card-body">
+                        <h4 class="card-title" style="text-align: center;">{{ (mars_html and mars_html.hemisphere[0]['title']) or "No data found yet" }}</h4>
+                        <br>
+                    </div>
+                </div>        
+            </div>
+            <div class='col-md-6'>
+                <div class="card" class = "img-responsive" width = "100%" style="border: 1 solid grey;">
+                    <img class="card-img-top" src="{{ (mars_html and mars_html.hemisphere[1]['img_url']) or "No data found yet" }}" alt="Card image cap" class = "img-responsive" width = "100%">
+                    <div class="card-body">
+                        <h4 class="card-title" style="text-align: center;">{{ (mars_html and mars_html.hemisphere[1]['title']) or "No data found yet" }}</h4>
+                        <br>
+                    </div>
+                </div>        
+            </div>
+        </div>
+
+        <!-- Fifth row -  Hemisphere   -->
+        <div class="row">
+            <div class='col-md-6'>
+                <img src="{{ (mars_html and mars_html.hemisphere[2]['img_url']) or "No data found yet" }}" class = "img-responsive" width = "100%">
+            </div>
+            <div class='col-md-6'>
+                <img src="{{ (mars_html and mars_html.hemisphere[3]['img_url']) or "No data found yet" }}" class = "img-responsive" width = "100%">
+            </div>
+        </div>
+        
+        <!-- Sixth row -  Image Titles   -->
+        <div class="row">
+            <div class='col-md-6' style="text-align: center;">
+                <h4>{{ (mars_html and mars_html.hemisphere[2]['title']) or "No data found yet" }}</h4>
+                <br>
+            </div>
+            <div class='col-md-6' style="text-align: center;">
+                <h4>{{ (mars_html and mars_html.hemisphere[3]['title']) or "No data found yet" }}</h4>
+                <br>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
