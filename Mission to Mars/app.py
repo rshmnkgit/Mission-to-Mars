@@ -6,7 +6,6 @@ import scrape_missonmars
 app = Flask(__name__)
 
 # Use PyMongo to establish Mongo connection
-# mongo = PyMongo(app, uri="mongodb://localhost:27017/test_mars_db")
 mongo = PyMongo(app, uri="mongodb://localhost:27017/mission_mars_db")
 
 
@@ -32,11 +31,7 @@ def scrape():
     hemisphere_list = scrape_missonmars.scrape_hemisphere()
     marsfact_dict = scrape_missonmars.scrape_marsfacts()
 
-    # mars_dictionary = {'news_title':mars_news[0], 'news_para':mars_news[1], 
-    #                     'jpl_image':jpl_img,
-    #                     hemi_list }
     print(f"\n----------------------------")
-    # print(mars_dictionary)
     print(f"news  {mars_news}")
     print(f"img src   {jpl_imageurl} ")
     print(f"hemisp  {hemisphere_list}")
@@ -44,10 +39,10 @@ def scrape():
     print("-------------------------------\n")
 
     mars_dictionary = {'news_title':mars_news[0], 'news_para':mars_news[1], 
-                        'jpl_image':jpl_imageurl,
-                        'hemisphere':hemisphere_list,
-                        'mars_data':marsfact_dict
-                        }
+                    'jpl_image':jpl_imageurl,
+                    'hemisphere':hemisphere_list,
+                    'mars_data':marsfact_dict
+                    }
 
     # Update the Mongo database using update and upsert=True
     mongo.db.marscollection.update({}, mars_dictionary, upsert=True)    

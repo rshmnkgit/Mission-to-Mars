@@ -38,14 +38,14 @@
                 <!--  Display Mars Facts Table    -->
                 <h3> Mars Facts </h3>
                 <table border="1">
-                    <tr>
-                        <td>Description</td>
-                        <td>Values</td>
+                    <tr">
+                        <td style="padding-left: 5px;"><strong>Description</strong></td>
+                        <td style="padding-left: 5px;"><strong>Values</strong></td>
                     </tr>
                     {% for row in mars_html.mars_data %}
                     <tr>
-                        <td>{{ row.Description }}</td>
-                        <td>{{ row.Units }}</td>
+                        <td style="padding-left: 5px;">{{ row.Description }}</td>
+                        <td style="padding-left: 5px;">{{ row.Units }}</td>
                     </tr>
                     {% endfor %}
                 </table>
