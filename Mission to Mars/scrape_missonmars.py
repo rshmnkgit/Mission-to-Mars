@@ -82,7 +82,8 @@ def scrape_hemisphere():
 
     for item in range(4):
         browser.find_by_tag('h3')[item].click()
-
+        time.sleep(2)
+        
         html = browser.html
         soup = bs(html, 'html.parser')
 
